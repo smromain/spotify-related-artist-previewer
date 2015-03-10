@@ -1,8 +1,16 @@
 var React = require('react');
 var spotify = require('./spotifySearchModule');
+var MasonryMixin = require('react-masonry-mixin');
+ 
+var masonryOptions = {
+    transitionDuration: 0,
+    columnWidth: 300,
+    gutter: 40
+};
 
 
 var Card = React.createClass({
+    mixins: [MasonryMixin('masonryContainer', masonryOptions)],
     loadData: function(){
         var self = this;
         spotify.relatedSearch('u2', function(items){
@@ -17,26 +25,25 @@ var Card = React.createClass({
     },
     render: function(){
         var files;
-        var artistName;
         if (this.state.data){
             files = this.state.data.map(
                 function(item){
                     var name = item[0].artists[0].name;
                     var artist = item.map(function(track){
-                        return (<div>{track.name} <br></br>
-                            <audio src={track.preview_url} controls="controls"></audio></div>)
+                        return (<div><div className="title">{track.name}<br></br></div>
+                            <div className="audio"><audio src={track.preview_url} controls="controls"></audio></div></div>)
                     })
-                    return (<div><br></br>{name}<br>{artist}</br></div>);
+                    return (<div className="card">{name}<br>{artist}</br></div>);
                 });
             return (
                 <div>
-                <div>{files}</div>
+                <div ref="masonryContainer">{files}</div>
                 </div>
                 )
         }
         else {
             return (
-            <div>Loading</div>
+            <div ref="masonryContainer">Loading</div>
             )
         }
     }
