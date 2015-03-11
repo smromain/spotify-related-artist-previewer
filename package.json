@@ -2,9 +2,6 @@
   "name": "spotify-react-song-",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "start": "browserify -t reactify client/javascripts/main.js > public/javascripts/compiled.js && node ./bin/www"
-  },
   "dependencies": {
     "bluebird": "^2.9.13",
     "body-parser": "~1.8.1",
