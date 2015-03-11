@@ -39,7 +39,7 @@ var Card = React.createClass({displayName: "Card",
                         return (React.createElement("div", null, React.createElement("div", {className: "title"}, track.name, React.createElement("br", null)), 
                             React.createElement("div", {className: "audio"}, React.createElement("audio", {src: track.preview_url, controls: "controls"}))))
                     })
-                    return (React.createElement("div", {className: "card"}, name, React.createElement("br", null, artist)));
+                    return (React.createElement("div", {className: "card"}, React.createElement("h4", null, name), artist));
                 });
             return (
                 React.createElement("div", null, 
@@ -46326,4 +46326,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[2]);
+},{}]},{},[1,2,3]);
