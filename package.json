@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "browserify -t reactify client/javascripts/main.js > public/javascripts/compiled.js && nodemon ./bin/www && node ./bin/www"
+    "start": "browserify -t reactify client/javascripts/main.js > public/javascripts/compiled.js && node ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.8.1",
