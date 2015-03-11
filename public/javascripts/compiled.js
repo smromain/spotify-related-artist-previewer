@@ -12,14 +12,19 @@ var masonryOptions = {
 
 var Card = React.createClass({displayName: "Card",
     mixins: [MasonryMixin('masonryContainer', masonryOptions)],
-    loadData: function(){
+    loadData: function(query){
         var self = this;
-        spotify.relatedSearch('u2', function(items){
+        if (!query) return false;
+        spotify.relatedSearch(query, function(items){
                 self.setState({data: items})
         });
     },
     getInitialState: function(){
-        return {data: undefined}
+        return {data: undefined, query: 'U2'}
+    },
+    newArtistSearch: function(event){
+        event.preventDefault();
+        this.loadData(this.refs.artist.getDOMNode().value);
     },
     componentDidMount: function(){
         this.loadData()
@@ -38,13 +43,25 @@ var Card = React.createClass({displayName: "Card",
                 });
             return (
                 React.createElement("div", null, 
+                React.createElement("form", {className: "search-form", onSubmit: this.newArtistSearch}, 
+                    React.createElement("h3", null, "Artist To Search"), 
+                    React.createElement("input", {type: "text", ref: "artist", defaultValue: this.state.query}), 
+                    React.createElement("input", {type: "submit", value: "new search?"})
+                ), 
                 React.createElement("div", {ref: "masonryContainer"}, files)
                 )
                 )
         }
         else {
             return (
-            React.createElement("div", {ref: "masonryContainer"}, "Loading")
+                React.createElement("div", null, 
+            React.createElement("form", {className: "search-form", onSubmit: this.newArtistSearch}, 
+                    React.createElement("h3", null, "Artist To Search"), 
+                    React.createElement("input", {type: "text", ref: "artist", defaultValue: this.state.query}), 
+                    React.createElement("input", {type: "submit", value: "new search?"})
+            ), 
+            React.createElement("div", {ref: "masonryContainer"}, "Search for an artist above!")
+            )
             )
         }
     }

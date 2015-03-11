@@ -1,10 +1,10 @@
 {
-  "name": "rdio-react",
+  "name": "spotify-react-song-previewer",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build-jsn": "browserify client/javascripts/main.js > public/javascripts/compiled.js",
-    "start": "npm build && nodemon ./bin/www"
+    "build": "browserify -t reactify client/javascripts/main.js > public/javascripts/compiled.js && nodemon ./bin/www",
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.8.1",

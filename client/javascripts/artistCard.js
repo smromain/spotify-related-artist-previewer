@@ -11,14 +11,19 @@ var masonryOptions = {
 
 var Card = React.createClass({
     mixins: [MasonryMixin('masonryContainer', masonryOptions)],
-    loadData: function(){
+    loadData: function(query){
         var self = this;
-        spotify.relatedSearch('u2', function(items){
+        if (!query) return false;
+        spotify.relatedSearch(query, function(items){
                 self.setState({data: items})
         });
     },
     getInitialState: function(){
-        return {data: undefined}
+        return {data: undefined, query: 'U2'}
+    },
+    newArtistSearch: function(event){
+        event.preventDefault();
+        this.loadData(this.refs.artist.getDOMNode().value);
     },
     componentDidMount: function(){
         this.loadData()
@@ -37,13 +42,25 @@ var Card = React.createClass({
                 });
             return (
                 <div>
+                <form className="search-form" onSubmit={this.newArtistSearch}>
+                    <h3>Artist To Search</h3>
+                    <input type="text" ref="artist" defaultValue={this.state.query}/>
+                    <input type="submit" value="new search?"/>
+                </form>
                 <div ref="masonryContainer">{files}</div>
                 </div>
                 )
         }
         else {
             return (
-            <div ref="masonryContainer">Loading</div>
+                <div>
+            <form className="search-form" onSubmit={this.newArtistSearch}>
+                    <h3>Artist To Search</h3>
+                    <input type="text" ref="artist" defaultValue={this.state.query}/>
+                    <input type="submit" value="new search?"/>
+            </form>
+            <div ref="masonryContainer">Search for an artist above!</div>
+            </div>
             )
         }
     }

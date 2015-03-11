@@ -24,3 +24,7 @@ a {
 .audio {
 	overflow: hidden
 }
+
+.search-form {
+	padding: 2em;
+}
