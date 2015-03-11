@@ -1,1 +1,1 @@
-web: browserify -t reactify client/javascripts/main.js > public/javascripts/compiled.js && node app.js
+web: node app.js
