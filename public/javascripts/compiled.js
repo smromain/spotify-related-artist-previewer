@@ -5,8 +5,8 @@ var MasonryMixin = require('react-masonry-mixin');
  
 var masonryOptions = {
     transitionDuration: 0,
-    columnWidth: 300,
-    gutter: 40
+    columnWidth: 350,
+    gutter: 10
 };
 
 
@@ -35,11 +35,13 @@ var Card = React.createClass({displayName: "Card",
             files = this.state.data.map(
                 function(item){
                     var name = item[0].artists[0].name;
-                    var artist = item.map(function(track){
-                        return (React.createElement("div", null, React.createElement("div", {className: "title"}, track.name, React.createElement("br", null)), 
-                            React.createElement("div", {className: "audio"}, React.createElement("audio", {preload: "none", controls: true}, React.createElement("source", {src: track.preview_url, type: "audio/mpeg"})))))
-                    })
-                    return (React.createElement("div", {className: "card"}, React.createElement("h4", null, name), artist));
+                    var ids = [];
+                    item.forEach(function(item){
+                        ids.push(item.id)
+                    });
+                    var idString = ids.join(',');
+                    var playerURL = 'https://embed.spotify.com/?uri=spotify:trackset:' + name + '_top_tracks:' + idString;
+                    return (React.createElement("div", {className: "card"}, React.createElement("h4", null, name), React.createElement("div", {className: "audio"}, React.createElement("iframe", {src: playerURL, width: "350", height: "450", frameborder: "0", allowtransparency: "true"}))));
                 });
             return (
                 React.createElement("div", null, 

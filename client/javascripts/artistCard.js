@@ -4,8 +4,8 @@ var MasonryMixin = require('react-masonry-mixin');
  
 var masonryOptions = {
     transitionDuration: 0,
-    columnWidth: 300,
-    gutter: 40
+    columnWidth: 350,
+    gutter: 10
 };
 
 
@@ -34,11 +34,13 @@ var Card = React.createClass({
             files = this.state.data.map(
                 function(item){
                     var name = item[0].artists[0].name;
-                    var artist = item.map(function(track){
-                        return (<div><div className="title">{track.name}<br></br></div>
-                            <div className="audio"><audio preload="none" controls><source src={track.preview_url} type="audio/mpeg"></source></audio></div></div>)
-                    })
-                    return (<div className="card"><h4>{name}</h4>{artist}</div>);
+                    var ids = [];
+                    item.forEach(function(item){
+                        ids.push(item.id)
+                    });
+                    var idString = ids.join(',');
+                    var playerURL = 'https://embed.spotify.com/?uri=spotify:trackset:' + name + '_top_tracks:' + idString;
+                    return (<div className="card"><h4>{name}</h4><div className="audio"><iframe src={playerURL} width="350" height="450" frameborder="0" allowtransparency="true"></iframe></div></div>);
                 });
             return (
                 <div>
