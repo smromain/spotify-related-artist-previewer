@@ -36,7 +36,7 @@ var Card = React.createClass({
                     var name = item[0].artists[0].name;
                     var artist = item.map(function(track){
                         return (<div><div className="title">{track.name}<br></br></div>
-                            <div className="audio"><audio src={track.preview_url} controls="controls"></audio></div></div>)
+                            <div className="audio"><audio src={track.preview_url} controls="controls" preload="none"></audio></div></div>)
                     })
                     return (<div className="card"><h4>{name}</h4>{artist}</div>);
                 });
