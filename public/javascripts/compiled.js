@@ -37,7 +37,7 @@ var Card = React.createClass({displayName: "Card",
                     var name = item[0].artists[0].name;
                     var artist = item.map(function(track){
                         return (React.createElement("div", null, React.createElement("div", {className: "title"}, track.name, React.createElement("br", null)), 
-                            React.createElement("div", {className: "audio"}, React.createElement("audio", {src: track.preview_url, controls: "controls"}))))
+                            React.createElement("div", {className: "audio"}, React.createElement("audio", {preload: "none", controls: true}, React.createElement("source", {src: track.preview_url, type: "audio/mpeg"})))))
                     })
                     return (React.createElement("div", {className: "card"}, React.createElement("h4", null, name), artist));
                 });
