@@ -5,4 +5,4 @@
 ## Structure
   Back End: Express
 
-  Front End: React.JS, ejs, JQuery
+  Front End: React.JS, JQuery
