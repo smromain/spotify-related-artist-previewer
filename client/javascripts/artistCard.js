@@ -35,7 +35,6 @@ var Card = React.createClass({
                 function(data){
                     var bio = data.bio;
                     var item = data.tracks;
-                    console.log(item);
                     var name = item[0].artists[0].name;
                     var ids = [];
                     item.forEach(function(item){
