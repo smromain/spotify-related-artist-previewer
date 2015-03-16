@@ -19,7 +19,7 @@ var Card = React.createClass({
         });
     },
     getInitialState: function(){
-        return {data: undefined, query: 'U2'}
+        return {data: undefined, query: 'Devo'}
     },
     newArtistSearch: function(event){
         event.preventDefault();
@@ -32,15 +32,18 @@ var Card = React.createClass({
         var files;
         if (this.state.data){
             files = this.state.data.map(
-                function(item){
+                function(data){
+                    var bio = data.bio;
+                    var item = data.tracks;
+                    console.log(item);
                     var name = item[0].artists[0].name;
                     var ids = [];
                     item.forEach(function(item){
                         ids.push(item.id)
                     });
                     var idString = ids.join(',');
-                    var playerURL = 'https://embed.spotify.com/?uri=spotify:trackset:' + name + '_top_tracks:' + idString;
-                    return (<div className="card"><h4>{name}</h4><div className="audio"><iframe src={playerURL} width="350" height="450" frameborder="0" allowtransparency="true"></iframe></div></div>);
+                    var playerURL = 'https://embed.spotify.com/?uri=spotify:trackset:_top_tracks:' + idString;
+                    return (<div className="card"><h4>{name}</h4><p>{bio}</p><div className="audio"><div></div><div className="bottom"><iframe src={playerURL} seamless width="350" height="425" frameborder="0" allowtransparency="true"></iframe></div></div></div>);
                 });
             return (
                 <div>

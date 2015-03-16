@@ -20,7 +20,7 @@ var Card = React.createClass({displayName: "Card",
         });
     },
     getInitialState: function(){
-        return {data: undefined, query: 'U2'}
+        return {data: undefined, query: 'Devo'}
     },
     newArtistSearch: function(event){
         event.preventDefault();
@@ -33,15 +33,18 @@ var Card = React.createClass({displayName: "Card",
         var files;
         if (this.state.data){
             files = this.state.data.map(
-                function(item){
+                function(data){
+                    var bio = data.bio;
+                    var item = data.tracks;
+                    console.log(item);
                     var name = item[0].artists[0].name;
                     var ids = [];
                     item.forEach(function(item){
                         ids.push(item.id)
                     });
                     var idString = ids.join(',');
-                    var playerURL = 'https://embed.spotify.com/?uri=spotify:trackset:' + name + '_top_tracks:' + idString;
-                    return (React.createElement("div", {className: "card"}, React.createElement("h4", null, name), React.createElement("div", {className: "audio"}, React.createElement("iframe", {src: playerURL, width: "350", height: "450", frameborder: "0", allowtransparency: "true"}))));
+                    var playerURL = 'https://embed.spotify.com/?uri=spotify:trackset:_top_tracks:' + idString;
+                    return (React.createElement("div", {className: "card"}, React.createElement("h4", null, name), React.createElement("p", null, bio), React.createElement("div", {className: "audio"}, React.createElement("div", null), React.createElement("div", {className: "bottom"}, React.createElement("iframe", {src: playerURL, seamless: true, width: "350", height: "425", frameborder: "0", allowtransparency: "true"})))));
                 });
             return (
                 React.createElement("div", null, 
@@ -110,7 +113,13 @@ function artistSearch(query, cb){
 							$.ajax({
 								url: 'https://api.spotify.com/v1/artists/' + item.id + '/top-tracks?country=us',
 								success: function(data){
-									return resolve(data);
+									$.ajax({
+										url: 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + item.name + '&api_key=4ab8061faad02381db25568da3d061ff&format=json',
+										success: function(lastfm){
+											data.bio = $('<div>' + lastfm.artist.bio.summary + '</div>').text().split('Read more about')[0];
+											return resolve(data);
+										}
+									})
 								}
 							})
 						}))
@@ -120,7 +129,7 @@ function artistSearch(query, cb){
 					Promise.settle(finalDataPromises).then(function(results){
 						var resultingData = [];
 						results.forEach(function(item){
-							resultingData.push(item.value().tracks);
+							resultingData.push({tracks: item.value().tracks, bio: item.value().bio});
 						})
 						return cb(resultingData);
 					})
