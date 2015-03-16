@@ -114,7 +114,7 @@ function artistSearch(query, cb){
 								url: 'https://api.spotify.com/v1/artists/' + item.id + '/top-tracks?country=us',
 								success: function(data){
 									$.ajax({
-										url: 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + item.name + '&api_key=4ab8061faad02381db25568da3d061ff&format=json',
+										url: 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + item.name + '&api_key=4ab8061faad02381db25568da3d061ff&format=json',
 										success: function(lastfm){
 											data.bio = $('<div>' + lastfm.artist.bio.summary + '</div>').text().split('Read more about')[0];
 											return resolve(data);
