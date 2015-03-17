@@ -14,8 +14,8 @@ var Card = React.createClass({
     loadData: function(query){
         var self = this;
         if (!query) return false;
-        spotify.relatedSearch(query, function(items){
-                self.setState({data: items})
+        spotify.relatedSearch(query).then(function (artists) {
+            self.setState({ data: artists });
         });
     },
     getInitialState: function(){
@@ -35,7 +35,6 @@ var Card = React.createClass({
                 function(data){
                     var bio = data.bio;
                     var item = data.tracks;
-                    console.log(item);
                     var name = item[0].artists[0].name;
                     var ids = [];
                     item.forEach(function(item){
