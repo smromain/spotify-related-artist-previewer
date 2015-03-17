@@ -129,7 +129,7 @@ var getRelatedArtistInfo = function (artist) {
 };
 
 module.exports = {
-    relatedSearch: function (query, cb) {
+    relatedSearch: function (query) {
         return searchForArtist(query).then(getRelatedArtists).map(getRelatedArtistInfo);
     }
 };
