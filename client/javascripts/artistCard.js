@@ -14,8 +14,8 @@ var Card = React.createClass({
     loadData: function(query){
         var self = this;
         if (!query) return false;
-        spotify.relatedSearch(query, function(items){
-                self.setState({data: items})
+        spotify.relatedSearch(query).then(function (artists) {
+            self.setState({ data: artists });
         });
     },
     getInitialState: function(){
