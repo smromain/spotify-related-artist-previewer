@@ -3,7 +3,10 @@ var path = require('path'),
     browserify = require('browserify'),
     reactify = require('reactify'),
     source = require('vinyl-source-stream'),
-    plumber = require('gulp-plumber');
+    plumber = require('gulp-plumber'),
+    sass = require('gulp-sass'),
+    rename = require('gulp-rename'),
+    livereload = require('gulp-livereload');
 
 var MAIN_JS_FILE = path.join(__dirname, './client/javascripts/main.js');
 var PUBLIC_JS_DIR = path.join(__dirname, './public/javascripts');
@@ -28,6 +31,19 @@ gulp.task('compileJS', function () {
 
 });
 
+gulp.task('compileCSS', function () {
+
+    return gulp.src('./client/sass/main.scss')
+        .pipe(plumber())
+        .pipe(sass())
+        .pipe(rename('style.css'))
+        .pipe(gulp.dest('./public/stylesheets'))
+        .pipe(livereload());
+
+});
+
 gulp.task('default', function () {
+    livereload.listen();
     gulp.watch('client/javascripts/**/*.js', ['compileJS']);
+    gulp.watch('client/sass/**/*.scss', ['compileCSS']);
 });
