@@ -50,7 +50,7 @@ var ArtistCard = React.createClass({
                 <p>{bio}</p>
                 <div className="audio">
                     <div className="bottom">
-                        <iframe src={playerURL} seamless width="350" height="425" frameborder="0" allowtransparency="true"></iframe>
+                        <iframe src={playerURL} seamless width="350" height="425" frameBorder="0" allowTransparency="true"></iframe>
                     </div>
                 </div>
             </div>

@@ -52,7 +52,7 @@ var ArtistCard = React.createClass({displayName: "ArtistCard",
                 React.createElement("p", null, bio), 
                 React.createElement("div", {className: "audio"}, 
                     React.createElement("div", {className: "bottom"}, 
-                        React.createElement("iframe", {src: playerURL, seamless: true, width: "350", height: "425", frameborder: "0", allowtransparency: "true"})
+                        React.createElement("iframe", {src: playerURL, seamless: true, width: "350", height: "425", frameBorder: "0", allowTransparency: "true"})
                     )
                 )
             )
