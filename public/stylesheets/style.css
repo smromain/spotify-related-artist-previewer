@@ -28,12 +28,10 @@ a {
   .card p {
     width: 100%;
     font-size: 8pt; }
-  .card .bottom {
-    vertical-align: bottom;
-    height: 425px; }
   .card .audio {
     width: 100%;
-    margin: 0 auto; }
+    margin: 0 auto;
+    height: 425px; }
     .card .audio iframe {
       display: block;
       width: 340px;

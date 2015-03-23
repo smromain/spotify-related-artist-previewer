@@ -32,6 +32,14 @@ var SearchForm = React.createClass({displayName: "SearchForm",
 
 });
 
+var Player = React.createClass({displayName: "Player",
+    render: function(){
+        return (React.createElement("div", {className: "audio"}, 
+                    React.createElement("iframe", {src: this.props.url, seamless: true, width: "350", height: "425", frameBorder: "0", allowTransparency: "true"})
+                ))
+    }
+})
+
 var ArtistCard = React.createClass({displayName: "ArtistCard",
 
     render: function () {
@@ -50,11 +58,7 @@ var ArtistCard = React.createClass({displayName: "ArtistCard",
             React.createElement("div", {className: "card"}, 
                 React.createElement("h2", null, name), 
                 React.createElement("p", null, bio), 
-                React.createElement("div", {className: "audio"}, 
-                    React.createElement("div", {className: "bottom"}, 
-                        React.createElement("iframe", {src: playerURL, seamless: true, width: "350", height: "425", frameBorder: "0", allowTransparency: "true"})
-                    )
-                )
+                React.createElement(Player, {url: playerURL})
             )
         );
     }

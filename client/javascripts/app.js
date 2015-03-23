@@ -30,6 +30,14 @@ var SearchForm = React.createClass({
 
 });
 
+var Player = React.createClass({
+    render: function(){
+        return (<div className="audio">
+                    <iframe src={this.props.url} seamless width="350" height="425" frameBorder="0" allowTransparency="true"></iframe>
+                </div>)
+    }
+})
+
 var ArtistCard = React.createClass({
 
     render: function () {
@@ -48,11 +56,7 @@ var ArtistCard = React.createClass({
             <div className="card">
                 <h2>{name}</h2>
                 <p>{bio}</p>
-                <div className="audio">
-                    <div className="bottom">
-                        <iframe src={playerURL} seamless width="350" height="425" frameBorder="0" allowTransparency="true"></iframe>
-                    </div>
-                </div>
+                <Player url={playerURL}/>
             </div>
         );
     }
