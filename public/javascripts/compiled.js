@@ -134,7 +134,7 @@ var App = require('./app');
 var $ = require('jquery');
 
 
-React.render(React.createElement(App, null), document.getElementById('test'));
+React.render(React.createElement(App, null), document.getElementById('module'));
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/client/javascripts/main.js","/client/javascripts")
 },{"./app":1,"_process":9,"buffer":5,"jquery":11,"react":157}],3:[function(require,module,exports){

@@ -13,6 +13,7 @@ a {
 
 .card-container {
   display: flex;
+  margin-top: 20px;
   flex-direction: row;
   flex-wrap: wrap; }
 
